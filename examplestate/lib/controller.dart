@@ -1,5 +1,4 @@
 import 'dart:async';
-
 class Controller {
   int _count = 0;
   int get count => _count;
@@ -16,23 +15,3 @@ class Controller {
   }
 }
 
-
-
-abstract class BaseStream<T> {
-  T? data;
-}
-
-class StreamManagement<T extends BaseStream> {
-  StreamController<T> controller = StreamController.broadcast();
-}
-
-class CountModel extends BaseStream {
-  int count = 0;
-}
-
-class CounterController extends StreamManagement {
-  CountModel countModel = CountModel();
-  void inc() {
-    controller.sink.add(countModel);
-  }
-}
