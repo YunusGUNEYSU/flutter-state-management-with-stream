@@ -1,4 +1,5 @@
 import 'package:examplestate/inherited_stream.dart';
+import 'package:examplestate/stream_consumer.dart';
 import 'package:examplestate/third_page.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +38,19 @@ class _SecondPageState extends State<SecondPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const Text('Second Page'),
+            const SizedBox(
+              height: 30,
+            ),
+            Consumer(
+              streamController: Streamer.of(context)!.controller.controller,
+              initalData: Streamer.of(context)?.controller.count,
+              builder: (buildContext, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data.toString());
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
             StreamBuilder<int>(
                 initialData: Streamer.of(context)?.controller.count,
                 stream: Streamer.of(context)?.controller.controller.stream,
