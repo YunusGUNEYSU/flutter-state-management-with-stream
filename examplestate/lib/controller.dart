@@ -6,7 +6,6 @@ class Controller {
   int get count => _count;
 
   StreamController<int> controller = StreamController.broadcast();
-  StreamController<Record> controller2 = StreamController.broadcast();
   void incCount() {
     _count++;
     controller.sink.add(_count);
