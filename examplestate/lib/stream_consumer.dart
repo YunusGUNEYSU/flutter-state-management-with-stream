@@ -8,7 +8,6 @@ class Consumer<T> extends StatefulWidget {
   final StreamController<T> streamController;
   final Widget Function(BuildContext buildContext, AsyncSnapshot<T> snapshot) builder;
   final dynamic initalData;
-  
 
   @override
   State<Consumer<T>> createState() => _ConsumerState<T>();
@@ -20,6 +19,12 @@ class _ConsumerState<T> extends State<Consumer<T>> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     stateStream = widget.streamController.stream;
+  }
+
+  @override
+  void dispose() {
+    widget.streamController.close();
+    super.dispose();
   }
 
   @override
